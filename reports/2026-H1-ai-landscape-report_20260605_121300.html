@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 上半年 AI 技术全景报告（七大领域）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --glass-bg: rgba(255,255,255,0.72);
+  --glass-border: rgba(255,255,255,0.45);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.06);
+  --blur: 20px;
+  --radius: 18px;
+  --radius-sm: 12px;
+  --c-blue: #2563eb;
+  --c-orange: #ea580c;
+  --c-green: #16a34a;
+  --c-purple: #9333ea;
+  --c-red: #dc2626;
+  --c-cyan: #0891b2;
+  --c-amber: #d97706;
+  --text-primary: #1a1a2e;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --bg-page: #f1f5f9;
+  --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Noto Sans SC', 'Space Grotesk', -apple-system, sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  max-width: 1440px;
+  margin: 0 auto;
+  gap: 28px;
+  padding: 28px 20px;
+}
+aside.nav {
+  position: sticky;
+  top: 28px;
+  height: fit-content;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 20px 14px;
+  box-shadow: var(--glass-shadow);
+}
+aside.nav h4 { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--text-muted); margin-bottom:14px; }
+aside.nav a { display:block; padding:7px 10px; margin-bottom:3px; border-radius:8px; text-decoration:none; color:var(--text-secondary); font-size:12.5px; font-weight:500; transition:all .2s; }
+aside.nav a:hover { background:rgba(37,99,235,0.06); color:var(--c-blue); }
+main { min-width:0; }
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 36px 40px;
+  margin-bottom: 24px;
+  box-shadow: var(--glass-shadow);
+}
+header.page-header { padding:44px 48px; margin-bottom:28px; }
+header .date { font-size:12px; color:var(--text-muted); font-weight:500; letter-spacing:1.5px; text-transform:uppercase; }
+header h1 { font-family:'Space Grotesk',sans-serif; font-size:34px; font-weight:700; margin:8px 0; background:var(--accent-gradient); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+header .subtitle { font-size:15px; color:var(--text-secondary); }
+.stats-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:28px; }
+.stat-card { background:var(--glass-bg); backdrop-filter:blur(var(--blur)); border:1px solid var(--glass-border); border-radius:var(--radius-sm); padding:20px; text-align:center; box-shadow:var(--glass-shadow); }
+.stat-card .number { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; }
+.stat-card .label { font-size:12px; color:var(--text-muted); margin-top:4px; }
+h2 { font-family:'Space Grotesk',sans-serif; font-size:22px; font-weight:700; margin-bottom:20px; }
+h3 { font-size:16px; font-weight:600; margin:20px 0 12px; color:var(--text-primary); }
+.timeline { position:relative; padding-left:24px; border-left:2px solid rgba(37,99,235,0.15); }
+.timeline-item { margin-bottom:16px; position:relative; }
+.timeline-item::before { content:''; position:absolute; left:-29px; top:8px; width:10px; height:10px; border-radius:50%; background:var(--c-blue); border:2px solid white; }
+.timeline-item .month { font-size:11px; font-weight:700; color:var(--c-blue); text-transform:uppercase; letter-spacing:1px; }
+.timeline-item .content { font-size:13.5px; color:var(--text-secondary); margin-top:4px; }
+.timeline-item .content strong { color:var(--text-primary); }
+table { width:100%; border-collapse:collapse; font-size:13px; margin:12px 0; }
+th { text-align:left; padding:10px 12px; background:var(--bg-page); border-radius:6px; font-weight:600; color:var(--text-secondary); }
+td { padding:10px 12px; border-bottom:1px solid rgba(0,0,0,0.04); color:var(--text-secondary); }
+.insight-box { background:linear-gradient(135deg,rgba(102,126,234,0.04),rgba(118,75,162,0.04)); border-radius:var(--radius-sm); padding:20px 24px; margin:16px 0; border-left:4px solid var(--c-purple); }
+.insight-box p { font-size:14px; color:var(--text-secondary); margin-bottom:8px; }
+.insight-box p:last-child { margin-bottom:0; }
+.tag { display:inline-block; padding:2px 8px; border-radius:4px; font-size:11px; font-weight:600; margin-right:4px; }
+.tag.blue { background:rgba(37,99,235,0.08); color:var(--c-blue); }
+.tag.orange { background:rgba(234,88,12,0.08); color:var(--c-orange); }
+.tag.green { background:rgba(22,163,74,0.08); color:var(--c-green); }
+.tag.purple { background:rgba(147,51,234,0.08); color:var(--c-purple); }
+.tag.red { background:rgba(220,38,38,0.08); color:var(--c-red); }
+.tag.cyan { background:rgba(8,145,178,0.08); color:var(--c-cyan); }
+.tag.amber { background:rgba(217,119,6,0.08); color:var(--c-amber); }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.three-col { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+@media(max-width:1000px) { .layout{grid-template-columns:1fr;} aside.nav{display:none;} .stats-grid{grid-template-columns:repeat(2,1fr);} .two-col{grid-template-columns:1fr;} .three-col{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="nav">
+  <h4>目录</h4>
+  <a href="#overview">全景概览</a>
+  <a href="#agents">Agent 框架</a>
+  <a href="#models">开源大模型</a>
+  <a href="#multimodal">多模态 AI</a>
+  <a href="#edge">边缘部署</a>
+  <a href="#security">AI 安全</a>
+  <a href="#infra">算力基础设施</a>
+  <a href="#platform">平台与商业</a>
+  <a href="#outlook">下半年展望</a>
+</aside>
+
+<main>
+<header class="page-header glass-card">
+  <div class="date">2026年1月 — 6月</div>
+  <h1>AI 技术全景报告</h1>
+  <div class="subtitle">七大领域 · 半年演进 · 从框架到商业的完整图谱</div>
+</header>
+
+<!-- Key Stats -->
+<div class="stats-grid">
+  <div class="stat-card"><div class="number" style="color:var(--c-blue)">9650亿</div><div class="label">Anthropic 估值（美元）</div></div>
+  <div class="stat-card"><div class="number" style="color:var(--c-orange)">47.3k</div><div class="label">DeerFlow GitHub Stars</div></div>
+  <div class="stat-card"><div class="number" style="color:var(--c-green)">1.6T</div><div class="label">DeepSeek V4 总参数</div></div>
+  <div class="stat-card"><div class="number" style="color:var(--c-purple)">30+</div><div class="label">MCP 安全 CVE 数量</div></div>
+</div>
+
+<!-- Section 1: Overview -->
+<div class="glass-card" id="overview">
+  <h2>全景概览：2026 上半年 AI 七大主题</h2>
+  <div class="insight-box">
+    <p><strong>1. Agent 从 Demo 走向生产</strong> — Claude Code 年化 25 亿美元、Cursor ARR 20 亿，Agent 产品完成商业验证</p>
+    <p><strong>2. MoE 成为绝对主流</strong> — 几乎所有旗舰模型均为 MoE 架构，典型 1T 总参/30-50B 活跃</p>
+    <p><strong>3. 多模态统一架构元年</strong> — Midjourney V8 实现图/视频/3D 一体化，Sora 关停标志旧路线终结</p>
+    <p><strong>4. 边缘推理实用化</strong> — Ollama+MLX 一键部署、FP4 量化标配、浏览器跑 7B 模型成为现实</p>
+    <p><strong>5. 安全攻防进入 AI vs AI</strong> — MCP 暴露 30+ CVE，Glasswing 150 家联盟"用 AI 保护 AI"</p>
+    <p><strong>6. 算力军备无上限</strong> — 全球 AI 基础设施投资超 3000 亿美元，FP4 成为推理标配</p>
+    <p><strong>7. 估值逼近万亿</strong> — Anthropic 9650 亿、OpenAI 8520 亿，但均未盈利</p>
+  </div>
+</div>
+
+<!-- Section 2: Agent Frameworks -->
+<div class="glass-card" id="agents">
+  <h2><span class="tag blue">领域一</span> Agent 框架与编排基础设施</h2>
+
+  <h3>生态格局</h3>
+  <table>
+    <tr><th>框架</th><th>公司</th><th>定位</th><th>关键事件</th></tr>
+    <tr><td>DeerFlow 2.0</td><td>字节跳动</td><td>Super Agent Harness</td><td>2月开源，3月升级为"AI Workers 的 Docker"</td></tr>
+    <tr><td>Claude Managed Agents</td><td>Anthropic</td><td>托管式运行时</td><td>4月公测，5月新增跨会话记忆</td></tr>
+    <tr><td>OpenAI Agents SDK</td><td>OpenAI</td><td>官方 Agent 开发包</td><td>3月+Temporal GA，4月沙箱执行</td></tr>
+    <tr><td>LangGraph v1.1</td><td>LangChain</td><td>状态图编排</td><td>3月发布，type-safe 改进</td></tr>
+    <tr><td>Strands 1.0</td><td>AWS</td><td>AWS 原生 Agent</td><td>5月 TypeScript SDK GA</td></tr>
+    <tr><td>Cursor 3</td><td>Anysphere</td><td>AI IDE</td><td>4月发布，多 Agent 工作流</td></tr>
+  </table>
+
+  <h3>协议标准化</h3>
+  <div class="two-col">
+    <div>
+      <p><strong>MCP（Model Context Protocol）</strong></p>
+      <p style="font-size:13px;color:var(--text-secondary)">定位："AI 的 USB-C"。Agent↔工具连接标准。2月推进 Streamable HTTP + OAuth 2.1。但安全堪忧：60天 30+ CVE。</p>
+    </div>
+    <div>
+      <p><strong>A2A（Agent-to-Agent）</strong></p>
+      <p style="font-size:13px;color:var(--text-secondary)">Google 提出，Linux Foundation 托管。4月超 150 个组织加入。CrewAI/LangGraph/ADK 均已适配。</p>
+    </div>
+  </div>
+
+  <h3>关键时间线</h3>
+  <div class="timeline">
+    <div class="timeline-item"><div class="month">1月</div><div class="content">新加坡发布全球首个 <strong>Agentic AI 治理框架</strong>；MCP "USB-C for AI"共识形成</div></div>
+    <div class="timeline-item"><div class="month">2月</div><div class="content"><strong>DeerFlow v1.0</strong> 字节开源；Codex 桌面版发布；Claude Agent SDK 升级</div></div>
+    <div class="timeline-item"><div class="month">3月</div><div class="content"><strong>DeerFlow 2.0</strong> 升级 Super Agent Harness；LangGraph v1.1；MCP 安全危机爆发</div></div>
+    <div class="timeline-item"><div class="month">4月</div><div class="content"><strong>Claude Managed Agents</strong> 公测；AutoGen 退役→MS Agent Framework；A2A 150+组织</div></div>
+    <div class="timeline-item"><div class="month">5月</div><div class="content">LangChain Interrupt 大会；Anthropic 发布 Multi-Agent Orchestration；Strands TS 1.0</div></div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong>Agent 基础设施完成从"自建"到"托管"的范式转换。Anthropic/OpenAI/AWS 均推出 Agent-as-a-Service，框架整合加速（AutoGen 退役、Windsurf 被收购）。多 Agent 并行成为默认模式。</p>
+  </div>
+</div>
+
+<!-- Section 3: Models -->
+<div class="glass-card" id="models">
+  <h2><span class="tag orange">领域二</span> 开源大模型（MoE / 多模态）</h2>
+
+  <h3>旗舰模型发布时间线</h3>
+  <table>
+    <tr><th>模型</th><th>参数(总/活跃)</th><th>公司</th><th>时间</th><th>亮点</th></tr>
+    <tr><td>Qwen3.5-397B</td><td>397B/17B</td><td>阿里</td><td>2月</td><td>201语言，1M上下文，多模态</td></tr>
+    <tr><td>GLM-5</td><td>744B/40B</td><td>智谱</td><td>2月</td><td>MIT开源，幻觉率历史新低</td></tr>
+    <tr><td>Nemotron 3 Super</td><td>120B/12B</td><td>NVIDIA</td><td>3月</td><td>Mamba-Transformer 混合 MoE</td></tr>
+    <tr><td>DeepSeek V4-Pro</td><td>1.6T/49B</td><td>DeepSeek</td><td>4月</td><td>1M上下文，对标闭源顶级</td></tr>
+    <tr><td>Kimi K2.6</td><td>1T/32B</td><td>月之暗面</td><td>4月</td><td>原生多模态 Agent</td></tr>
+    <tr><td>Command A+</td><td>218B/25B</td><td>Cohere</td><td>5月</td><td>首个 Apache 2.0 企业模型</td></tr>
+    <tr><td>Nemotron 3 Ultra</td><td>550B/55B</td><td>NVIDIA</td><td>6月</td><td>美国最强开源权重模型</td></tr>
+  </table>
+
+  <h3>架构演进趋势</h3>
+  <div class="two-col">
+    <div class="insight-box" style="border-color:var(--c-orange)">
+      <p><strong>MoE 稀疏率竞争</strong></p>
+      <p>NVIDIA 选择 10% 激活率（550B/55B），DeepSeek 约 3%（1.6T/49B）。更低激活=更高推理效率但训练更难。</p>
+    </div>
+    <div class="insight-box" style="border-color:var(--c-orange)">
+      <p><strong>混合架构创新</strong></p>
+      <p>NVIDIA Nemotron 引入 Mamba(SSM)+Transformer 混合 MoE，兼具 SSM 的线性复杂度和 Transformer 的表达力。</p>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong>中国模型集中爆发（2月 HuggingFace 前10均为中国模型）。模型设计从"对话"全面转向"长时 Agent 任务"。Meta 意外转向闭源（Muse Spark），Apache 2.0/MIT 成为开源主流许可。</p>
+  </div>
+</div>
+
+<!-- Section 4: Multimodal AI -->
+<div class="glass-card" id="multimodal">
+  <h2><span class="tag cyan">领域三</span> 多模态 AI（生图/视频/语音/3D）</h2>
+
+  <h3>图像生成：DiT 架构全面取代 UNet</h3>
+  <table>
+    <tr><th>模型</th><th>公司</th><th>时间</th><th>亮点</th></tr>
+    <tr><td>Midjourney V8</td><td>Midjourney</td><td>5月</td><td>统一架构生成图/视频/3D，里程碑</td></tr>
+    <tr><td>Flux 2</td><td>Black Forest Labs</td><td>4月</td><td>12B参数开源旗舰，原生多分辨率</td></tr>
+    <tr><td>Stable Diffusion 4</td><td>Stability AI</td><td>3月</td><td>MMDiT 架构，社区标杆</td></tr>
+    <tr><td>Ideogram 3.0</td><td>Ideogram</td><td>2月</td><td>文字渲染准确率 95%+</td></tr>
+    <tr><td>Google Imagen 4</td><td>Google</td><td>5月</td><td>Gemini 集成</td></tr>
+  </table>
+
+  <h3>视频生成：Sora 关停，中国厂商领跑</h3>
+  <table>
+    <tr><th>模型</th><th>公司</th><th>时间</th><th>亮点</th></tr>
+    <tr><td>Kling 3.0</td><td>快手</td><td>4月</td><td>2分钟连贯视频，物理模拟</td></tr>
+    <tr><td>Veo 3.1</td><td>Google DeepMind</td><td>5月</td><td>对话+环境音同步生成</td></tr>
+    <tr><td>Wan 2.1</td><td>阿里</td><td>3月</td><td>Apache 2.0 开源</td></tr>
+    <tr><td>Runway Gen-4</td><td>Runway</td><td>2月</td><td>多镜头叙事一致性</td></tr>
+    <tr><td>Sora ⚠️</td><td>OpenAI</td><td>2月关停</td><td>团队并入 GPT 视觉部门</td></tr>
+  </table>
+
+  <h3>语音合成与克隆：开源追平商业</h3>
+  <table>
+    <tr><th>模型</th><th>公司</th><th>时间</th><th>亮点</th></tr>
+    <tr><td>Chatterbox</td><td>Resemble AI</td><td>5月</td><td>MIT 开源，质量超 ElevenLabs</td></tr>
+    <tr><td>CosyVoice 3.0</td><td>阿里</td><td>5月</td><td>流式推理，多语言</td></tr>
+    <tr><td>VoxCPM2</td><td>OpenBMB</td><td>6月</td><td>无分词器范式，30语言，WER 1.84%</td></tr>
+    <tr><td>GPT-SoVITS v4</td><td>社区</td><td>4月</td><td>5秒声音克隆</td></tr>
+  </table>
+
+  <h3>3D 与数字人</h3>
+  <div class="two-col">
+    <div>
+      <table>
+        <tr><th>项目</th><th>亮点</th></tr>
+        <tr><td>Meshy 6</td><td>文字→PBR 材质网格</td></tr>
+        <tr><td>Tripo 3.1</td><td>&lt;10秒单图→3D</td></tr>
+        <tr><td>Rodin Gen-2.5</td><td>微软高精度3D</td></tr>
+        <tr><td>NVIDIA Cosmos 3</td><td>全模态世界模型开源</td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th>项目</th><th>亮点</th></tr>
+        <tr><td>HeyGen 4.0</td><td>实时互动数字人</td></tr>
+        <tr><td>Suno V5</td><td>5分钟完整编曲</td></tr>
+        <tr><td>PaddleOCR-VL-1.5</td><td>视觉语言端到端 OCR</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="insight-box" style="border-color:var(--c-cyan)">
+    <p><strong>核心洞察：</strong></p>
+    <p>1. <strong>统一多模态架构成为主流</strong> — Midjourney V8 首先实现图/视频/3D 统一生成，UNet 时代彻底结束</p>
+    <p>2. <strong>Sora 关停是标志性事件</strong> — "先做 demo 再商业化"路径在视频生成不可行，"先落地再迭代"胜出</p>
+    <p>3. <strong>开源 TTS 追平商业</strong> — Chatterbox（MIT）质量超 ElevenLabs，语音合成进入"开源够用"时代</p>
+    <p>4. <strong>语音大模型化</strong> — 拼接式→端到端神经→连续潜空间生成（VoxCPM2 无分词器范式）</p>
+  </div>
+</div>
+
+<!-- Section 5: Edge Deployment -->
+<div class="glass-card" id="edge">
+  <h2><span class="tag amber">领域四</span> 边缘部署与本地推理</h2>
+
+  <h3>本地推理框架</h3>
+  <table>
+    <tr><th>框架</th><th>定位</th><th>关键进展</th></tr>
+    <tr><td>Ollama + MLX</td><td>一键本地部署</td><td>5月深度集成，Apple Silicon 零配置加速</td></tr>
+    <tr><td>llama.cpp</td><td>C++ 推理引擎</td><td>5月 IQ_K (Trellis) 量化合并主线</td></tr>
+    <tr><td>vLLM</td><td>高吞吐 GPU 推理</td><td>PagedAttention v2 + 投机解码</td></tr>
+    <tr><td>ExLlamaV3</td><td>极致 GPU 量化推理</td><td>4月发布 EXL3 格式，2-8bit 连续精度</td></tr>
+    <tr><td>Transformers.js v4</td><td>浏览器端推理</td><td>3月发布，WebGPU 原生，浏览器跑 7B</td></tr>
+  </table>
+
+  <h3>量化技术演进</h3>
+  <table>
+    <tr><th>技术</th><th>精度</th><th>特点</th><th>状态</th></tr>
+    <tr><td>TurboQuant (NVIDIA)</td><td>FP4</td><td>Blackwell 硬件原生，NIM 一键部署</td><td>5月发布</td></tr>
+    <tr><td>IQ_K / Trellis</td><td>IQ1-IQ4</td><td>重要性矩阵驱动混合精度，极限压缩</td><td>5月合并主线</td></tr>
+    <tr><td>EXL3</td><td>2-8bit</td><td>GPU 专用连续精度</td><td>4月发布</td></tr>
+    <tr><td>QMX (Qualcomm)</td><td>W4</td><td>Snapdragon NPU 原生格式</td><td>4月发布</td></tr>
+    <tr><td>BitNet</td><td>W1.58</td><td>1-bit 训练，推理专用硬件路线</td><td>研究阶段</td></tr>
+  </table>
+
+  <h3>端侧 AI 芯片</h3>
+  <div class="three-col">
+    <div class="stat-card"><div class="number" style="color:var(--c-amber);font-size:18px">RTX Spark</div><div class="label">NVIDIA AI PC 专用芯片<br>6月发布</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--c-amber);font-size:18px">Jetson Thor</div><div class="label">NVIDIA 具身智能边缘<br>6月发布</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--c-amber);font-size:18px">Alexa+</div><div class="label">Amazon LLM 语音Agent<br>2月发布</div></div>
+  </div>
+
+  <h3>端云协作架构</h3>
+  <div class="insight-box" style="border-color:var(--c-amber)">
+    <p><strong>语音 Agent 端云协作模式</strong>（智能音箱/车载/机器人典型架构）</p>
+    <p>端侧（麦克风→VAD+ASR）→ 云端（Agent意图理解+MCP工具调用+响应生成）→ 端侧（TTS播报+设备控制）</p>
+    <p style="margin-top:8px"><strong>关键技术栈：</strong>端侧 ASR（Whisper.cpp/Sherpa-ONNX）· 云端 Agent（Claude/GPT+MCP）· 端侧 TTS（CosyVoice 3.0 流式）· 设备控制（MQTT/HTTP 回调）</p>
+    <p style="margin-top:8px"><strong>代表产品：</strong>Amazon Alexa+（2月）· 小米 HyperMind（3月）· Apple Intelligence Siri 2.0（WWDC 预期）</p>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong></p>
+    <p>1. <strong>FP4 成为推理标配</strong> — TurboQuant + Blackwell 硬件支持，工业级 FP4 无精度损失</p>
+    <p>2. <strong>"一键部署"成基本要求</strong> — Ollama+MLX 代表方向，用户不需要理解量化细节</p>
+    <p>3. <strong>推理成本每 6 个月降一个数量级</strong> — 硬件+软件+算法三路并进</p>
+    <p>4. <strong>边缘≠离线</strong> — 主流范式是端云协作（端侧做低延迟环节，云端做深度推理）</p>
+  </div>
+</div>
+
+<!-- Section 6: Security -->
+<div class="glass-card" id="security">
+  <h2><span class="tag red">领域五</span> AI 安全攻防</h2>
+
+  <h3>三大风险面</h3>
+  <table>
+    <tr><th>风险类别</th><th>严重程度</th><th>代表事件</th></tr>
+    <tr><td>MCP/Agent 工具链安全</td><td>🔴 高危</td><td>60天30+CVE，"AI供应链之母"RCE漏洞</td></tr>
+    <tr><td>模型供应链投毒</td><td>🟠 中高</td><td>HuggingFace恶意模型24.4万下载/tokenizer劫持</td></tr>
+    <tr><td>Prompt Injection</td><td>🟠 中高</td><td>Meta AI客服被社工攻破，劫持头部账号</td></tr>
+  </table>
+
+  <h3>政策法规进展</h3>
+  <div class="timeline">
+    <div class="timeline-item"><div class="month">2月</div><div class="content"><strong>国际AI安全报告2026</strong> 发布；英国深度伪造入刑；Anthropic <strong>RSP v3.0</strong></div></div>
+    <div class="timeline-item"><div class="month">3月</div><div class="content"><strong>EU AI Act 通用AI条款执法生效</strong>（3/31）</div></div>
+    <div class="timeline-item"><div class="month">5月</div><div class="content">EU 调整延期高风险AI合规截止；OpenAI 200人安全团队</div></div>
+    <div class="timeline-item"><div class="month">6月</div><div class="content">特朗普签署AI安全行政令（自愿提交模型测试）；<strong>Glasswing 扩至150家</strong></div></div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong>AI Agent 时代的安全范式完全改变——攻击面从"模型本身"扩展到"工具链+协议+供应链"。MCP 作为 Agent 核心协议却安全脆弱（CVSS 8.8-9.1），是当前最大系统性风险。</p>
+  </div>
+</div>
+
+<!-- Section 7: Infrastructure -->
+<div class="glass-card" id="infra">
+  <h2><span class="tag green">领域六</span> 算力基础设施</h2>
+
+  <h3>芯片世代</h3>
+  <table>
+    <tr><th>芯片</th><th>公司</th><th>工艺</th><th>状态</th><th>关键指标</th></tr>
+    <tr><td>Blackwell Ultra (GB200)</td><td>NVIDIA</td><td>4nm</td><td>大规模量产</td><td>NVL72机架 720 PFLOPS (FP4)</td></tr>
+    <tr><td>Vera Rubin</td><td>NVIDIA</td><td>3nm/2nm</td><td>2026H2</td><td>HBM4，下一代平台</td></tr>
+    <tr><td>MI350</td><td>AMD</td><td>3nm</td><td>2026中期</td><td>CDNA 4，HBM3E</td></tr>
+    <tr><td>TPU v6 Trillium</td><td>Google</td><td>—</td><td>全面开放</td><td>比v5e训练性能提升4.7x</td></tr>
+    <tr><td>Trainium2</td><td>Amazon</td><td>—</td><td>GA</td><td>UltraCluster 10万+芯片</td></tr>
+  </table>
+
+  <h3>资本投入规模</h3>
+  <table>
+    <tr><th>公司</th><th>2026年CapEx预估</th><th>关键动态</th></tr>
+    <tr><td>Alphabet/Google</td><td>1800-1900亿美元</td><td>800亿融资，巴菲特100亿，Cloud积压4600亿</td></tr>
+    <tr><td>Microsoft</td><td>~800亿美元</td><td>AI年化收入370亿，Maia 100扩大部署</td></tr>
+    <tr><td>Meta</td><td>~500-600亿美元</td><td>MTIA v2 内部部署</td></tr>
+    <tr><td>全球总计</td><td>>3000亿美元</td><td>沙特/阿联酋/日本/欧盟加入竞赛</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong>电力成为第一瓶颈（单机架 100-120kW），液冷/核能成刚需。"铲子vs淘金者"叙事持续——供给方确定性盈利，需求方仍在烧钱。巴菲特入场=传统价投对AI算力长期确定性的终极背书。</p>
+  </div>
+</div>
+
+<!-- Section 8: Platform -->
+<div class="glass-card" id="platform">
+  <h2><span class="tag purple">领域七</span> 平台化与商业模式</h2>
+
+  <h3>融资与估值里程碑</h3>
+  <div class="timeline">
+    <div class="timeline-item"><div class="month">1月</div><div class="content"><strong>xAI $200亿 Series E</strong>（估值2300亿）；Anthropic 签100亿条款书</div></div>
+    <div class="timeline-item"><div class="month">2月</div><div class="content"><strong>Anthropic $300亿 Series G</strong>（估值3800亿）；Claude Code 年化25亿</div></div>
+    <div class="timeline-item"><div class="month">3月</div><div class="content"><strong>OpenAI $1220亿</strong>（史上最大融资，估值8520亿）；首次开放个人投资者</div></div>
+    <div class="timeline-item"><div class="month">4月</div><div class="content"><strong>GPT-5.5 发布</strong>（定价比GPT-5涨8x）；Cursor洽谈20亿融资（估值500亿）</div></div>
+    <div class="timeline-item"><div class="month">5月</div><div class="content"><strong>Anthropic $650亿 Series H</strong>（估值9650亿，超越OpenAI）；秘密提交IPO</div></div>
+  </div>
+
+  <h3>收入数据对比</h3>
+  <table>
+    <tr><th>产品</th><th>年化收入/ARR</th><th>用户规模</th><th>增速</th></tr>
+    <tr><td>ChatGPT/OpenAI</td><td>~200亿+</td><td>周活9亿</td><td>同比翻倍</td></tr>
+    <tr><td>Anthropic/Claude</td><td>~140亿</td><td>—</td><td>高速增长</td></tr>
+    <tr><td>Claude Code</td><td>25亿</td><td>—</td><td>—</td></tr>
+    <tr><td>Cursor</td><td>20亿 ARR</td><td>—</td><td>一年从2→20亿</td></tr>
+    <tr><td>Perplexity</td><td>~5亿 ARR</td><td>—</td><td>同比+335%</td></tr>
+    <tr><td>Microsoft AI</td><td>370亿</td><td>—</td><td>—</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <p><strong>核心洞察：</strong>AI 公司估值逼近万亿但均未盈利（OpenAI 预计2026亏140亿）。收入验证了需求存在，但成本结构仍需算力降价才能扭亏。多云分发成为默认（OpenAI on Bedrock），模型不再是壁垒，平台生态和合规才是。</p>
+  </div>
+</div>
+
+<!-- Section 9: Outlook -->
+<div class="glass-card" id="outlook">
+  <h2>下半年展望</h2>
+
+  <table>
+    <tr><th>领域</th><th>预期事件</th><th>影响判断</th></tr>
+    <tr><td>Agent 框架</td><td>MCP v2 安全规范落地；A2A 进入企业级</td><td>Agent 安全从"事后修补"转向"设计时内建"</td></tr>
+    <tr><td>开源模型</td><td>1T+ 参数/30B 活跃的超大稀疏模型</td><td>开源在推理效率上全面追平闭源</td></tr>
+    <tr><td>多模态</td><td>视频生成进入"物理正确"竞赛；统一架构普及</td><td>视频/3D/图像用同一模型生成成为标配</td></tr>
+    <tr><td>边缘部署</td><td>Vera Rubin/MI350 量产；HBM4 开启</td><td>端侧跑 30B+ 模型成为现实</td></tr>
+    <tr><td>AI 安全</td><td>EU AI Act 高风险系统条款执行</td><td>合规成本成为 AI 公司新的重大支出项</td></tr>
+    <tr><td>算力</td><td>全球 AI CapEx 继续攀升</td><td>推理成本再降一个数量级</td></tr>
+    <tr><td>商业</td><td>Anthropic IPO；OpenAI 可能跟进</td><td>AI 从风险投资叙事转向公开市场定价</td></tr>
+  </table>
+
+  <div class="insight-box">
+    <p><strong>2026 下半年核心命题：</strong>当 Agent 成为主要收入来源、算力成本持续下降、多模态统一架构成熟——AI 公司能否实现"收入增速 > 成本增速"，将决定整个行业的估值是否经得起公开市场的检验。</p>
+  </div>
+</div>
+
+</main>
+</div>
+</body>
+</html>
