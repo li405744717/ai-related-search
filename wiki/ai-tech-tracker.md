@@ -1,6 +1,6 @@
 # AI 技术追踪 Wiki — 索引
 
-> 本目录包含 5 个技术领域的详细追踪文件，每个文件独立维护月度时间线和生态全景。
+> 本目录包含 7 个技术领域的详细追踪文件，每个文件独立维护月度时间线和生态全景。
 
 ## 领域索引
 
@@ -11,6 +11,8 @@
 | [ai-security.md](ai-security.md) | AI 安全攻防 | 漏洞、法规、对齐研究 |
 | [infra-compute.md](infra-compute.md) | 算力基础设施 | 芯片、数据中心、推理框架 |
 | [platform-biz.md](platform-biz.md) | 平台化与商业 | 融资、产品、商业模式 |
+| [multimodal-ai.md](multimodal-ai.md) | 多模态 AI | 生图/生视频/语音/3D/OCR/音乐 |
+| [edge-deployment.md](edge-deployment.md) | 边缘部署与本地推理 | 量化、推理框架、端侧芯片、端云协作 |
 
 ## 如何使用
 
